@@ -1,6 +1,8 @@
 # {EmployeeAPIService}
 #### {Brief description of application}, {Date of current version}
-#### By Evans Kibet -Group Lead Brillian Chepngeno Mourice Oronje
+#### By Evans Kibet -Group Lead 
+Brillian Chepngeno 
+Mourice Oronje
 
 ## Description
 {This is a NodeJS Express application to Create,Read,Delete,Update employees details  }
