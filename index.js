@@ -1,7 +1,11 @@
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
+
+const router = express.Router();
+
 const Schema = mongoose.Schema
+
 
 var employeeSchema = new Schema({
   firstName: { type: String, required: true },
@@ -36,6 +40,10 @@ app.get('/', function (req, res) {
   res.send('Hello World')
 })
 
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`)
+});
+
 app.get('/employees', async (req, res, next) => {
   employeeData.find()
     .then(async data => {
@@ -57,6 +65,31 @@ app.post('/employees', async (req, res, next) => {
   res.status(200).json({ message: 'data saved successful.' })
 })
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`)
+//update
+
+router.patch('/:id', async function (req, res) {
+  try {
+      const id = req.params.id;
+
+      const data = req.body;
+
+      const updatedData = await employeeData.findByIdAndUpdate(id, data);
+      res.status(200).json(updatedData);
+  } catch (error) {
+      res.status(400).json({ message: error.message });
+  }
 });
+
+//delete
+
+router.delete('/:id', async function (req, res) {
+  try {
+      const id = req.params.id;
+      const deletedData = await employeeData.findByIdAndDelete(id);
+      res.status(200).json(deletedData);
+  } catch (error) {
+      res.status(400).json({ message: error.message });
+  }
+});
+
+module.exports = router;
