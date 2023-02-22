@@ -2,7 +2,7 @@ name: Deploy employee service
 on:
   push:
     branches:
-      - master
+      - main
 jobs:
   deploy:
     name: Wait for Deploy
