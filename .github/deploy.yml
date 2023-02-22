@@ -1,0 +1,19 @@
+name: Deploy employee service
+on:
+  push:
+    branches:
+      - master
+jobs:
+  deploy:
+    name: Wait for Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait for Render Deployment
+        uses: bounceapp/render-action@0.6.0
+        with:
+          render-token: ${{RENDER_TOKEN }}
+          github-token: ${{GITHUB_TOKEN }}
+          service-id: ${{SERVICE_ID}}
+          retries: 20
+          wait: 16000
+          sleep: 30000
